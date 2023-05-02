@@ -1,50 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>추천 쇼핑몰 링크</h2>
-    <ul>
-      <li>
-        <a
-          href="https://11st.co.kr"
-          target="_blank"
-        >
-          11번가
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
+    <h2>쇼핑센타 바로가기</h2>
+    
     <h2>Ecosystem</h2>
     <ul>
       <li>
@@ -85,10 +43,10 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'MyReal',
   data () {
     return {
-      msg: '나는 진짜 뷰를 잘하고 싶다!'
+      msg: '이것은 나의 진짜 모듈!!!'
     }
   }
 }
