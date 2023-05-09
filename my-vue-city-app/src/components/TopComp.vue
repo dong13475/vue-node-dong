@@ -7,7 +7,11 @@
       변수로 셋팅이되고 cityData가 변경될때 반영되지 않는다!
       따라서 리엑티브 데이터를 직접 해당자리에 사용해야한다! -->
       <!-- <li v-for="(v, i) in sdata" v-bind:key="i" v-if="i != '인트로'"> -->
-      <li v-for="(v, i) in this.$store.state.cityData" v-bind:key="i" v-if="i != '인트로'">
+      <li
+        v-for="(v, i) in this.$store.state.cityData"
+        v-bind:key="i"
+        v-if="i != '인트로'"
+      >
         <a href="#" v-on:click="chgData(i)">
           {{ i }}
         </a>
@@ -16,12 +20,23 @@
     <!-- 메뉴선택이동링크 -->
     <div class="m2">
       <!-- v-on:click="" === @click="" -->
-      <a href="#" v-on:click="chgMenu(num)" v-text="'메뉴' + num"></a>
+      <!--
+        v-on:이벤트명.prevent 
+        기본기능막기 옵션 .prevent는 
+        event.preventDefault()와 같다!
+        참고)
+        v-on:이벤트명.stop
+        이벤트버블링막기 옵션 .stop은
+        event.stopPropagation()과 같다!
+      -->
+      <a href="#" v-on:click.prevent="chgMenu(num)" v-text="'메뉴' + num"></a>
     </div>
   </header>
 </template>
 
 <script>
+// 제이쿼리 불러오기!
+import $ from "jquery";
 export default {
   name: "TopArea",
   data() {
@@ -44,12 +59,55 @@ export default {
       // n - 메뉴번호전달
       console.log("메뉴변경:", n);
       // mutations 메서드 호출하기!
-      this.$store.commit('chgMenu',n);
+      this.$store.commit("chgMenu", n);
 
       // 메뉴1/메뉴2 전환을 위한 변수변경하기
       // 컴포넌트 변수인 num을 변경한다!
-      n===1 ? this.num=2 : this.num=1;
-    }
+      n === 1 ? (this.num = 2) : (this.num = 1);
+
+      // 메뉴변경시 DOM이 변경되므로 
+      // 제이쿼리 메서드 호출하기!
+      // 단, 제이쿼리 코드블록으로 싸서
+      // 호출함으로 DOM로드후 실행 보장함!! 
+      $(()=>this.setJQ());
+    },
+    // 제이쿼리 셋팅 메서드 ///
+    setJQ() {
+      console.log("JQ셋팅!");
+      // 링크 클릭시 a에 클래스 "on"주기
+      $(".gnb a").click(function(e) {
+        e.preventDefault();
+        $(this)
+          .addClass("on")
+          .parent()
+          .siblings()
+          .find("a")
+          .removeClass("on");
+
+        // 박스애니
+        showBx();
+      }); ///////// click ////////////
+
+      function showBx() {
+        // 이미지와 설명박스 순서대로 나타나기
+        $("main img")
+          .css({ opacity: 0 })
+          .stop()
+          .delay(500)
+          .fadeTo(500, 1);
+
+        $("main p")
+          .css({ opacity: 0 })
+          .stop()
+          .delay(1000)
+          .fadeTo(500, 1);
+      } ///// showBx 함수 /////
+    },
+  },
+  // DOM을 만들고 난후
+  mounted(){
+    // 제이쿼리 셋팅 메서드 호출!
+    this.setJQ();
   }
 };
 </script>
