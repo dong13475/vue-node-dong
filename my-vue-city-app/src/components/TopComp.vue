@@ -2,7 +2,12 @@
   <header>
     <ul class="gnb">
       <!-- v는 값, i는 속성명 -->
-      <li v-for="(v, i) in sdata" v-bind:key="i" v-if="i != '인트로'">
+      <!-- 리액티브 데이터인 뷰엑스 스토어 cityData변수를 
+      컴포넌트 변수인 sdata에 할당하여 사용하면 처음에만 할당된
+      변수로 셋팅이되고 cityData가 변경될때 반영되지 않는다!
+      따라서 리엑티브 데이터를 직접 해당자리에 사용해야한다! -->
+      <!-- <li v-for="(v, i) in sdata" v-bind:key="i" v-if="i != '인트로'"> -->
+      <li v-for="(v, i) in this.$store.state.cityData" v-bind:key="i" v-if="i != '인트로'">
         <a href="#" v-on:click="chgData(i)">
           {{ i }}
         </a>
@@ -40,6 +45,10 @@ export default {
       console.log("메뉴변경:", n);
       // mutations 메서드 호출하기!
       this.$store.commit('chgMenu',n);
+
+      // 메뉴1/메뉴2 전환을 위한 변수변경하기
+      // 컴포넌트 변수인 num을 변경한다!
+      n===1 ? this.num=2 : this.num=1;
     }
   }
 };
