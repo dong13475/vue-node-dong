@@ -1,5 +1,5 @@
 {
-  "name": "my-vue-city-app",
+  "name": "vue",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "dong13475 <travel1347@gmail.com>",
@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "jquery": "^3.6.4",
+    "jquery": "^3.7.0",
     "vue": "^2.5.2",
+    "vue-router": "^3.0.1",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

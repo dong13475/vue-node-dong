@@ -1,4 +1,4 @@
-# my-vue-city-app
+# vue
 
 > A Vue.js project
 
